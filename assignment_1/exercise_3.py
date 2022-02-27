@@ -1,5 +1,6 @@
 from sympy import *
 
+# Bigger the treeshold is, better will the estimation be but longer the running time will be.
 TREESHOLD = 0.001
 
 
