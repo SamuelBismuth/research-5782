@@ -19,15 +19,17 @@ def find_root(f, min, max):
         h = f(iter)/f_derivative(iter)
         iter = iter - h
     
-    print("The value of the root is {0}".format(iter))
+    return int(iter)
 
 
 def find_derivative(f, x):
     return lambdify(x, f(x).diff(x))
 
 '''
-Tests
+Running examples
 '''
 
-find_root(lambda x: x**2-4, 1, 3)
-find_root(lambda x: x * x * x - x * x + 2, 0, 2)
+if __name__ == '__main__':
+    print(find_root(lambda x: x**2-4, 1, 3))
+    print(find_root(lambda x: x * x * x - x * x + 2, 0, 2))
+    print(find_root(lambda x: x * x * x * x - x * x + 2, 0, 2))

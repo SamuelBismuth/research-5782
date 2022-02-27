@@ -22,45 +22,47 @@ def print_sorted(struct):
 
 
 '''
-Tests
+Running examples
 '''
 
-x = {"a":5, "c":6, "b":[(1, 3, 2, 5, 4), 3, 2, 4]}
-print_sorted(x)
-print()
+if __name__ == '__main__':
 
-x = {"a":5, (3, (3, 1)):(8, 4, 3), "b":[(1, 3, 2, 5, 4), 3, 2, 4]}
-print_sorted(x)
-print()
+    x = {"a":5, "c":6, "b":[(1, 3, 2, 5, 4), 3, 2, 4]}
+    print_sorted(x)
+    print()
 
-x = (3, [4, 3, 2], 9)
-print_sorted(x)
-print()
+    x = {"a":5, (3, (3, 1)):(8, 4, 3), "b":[(1, 3, 2, 5, 4), 3, 2, 4]}
+    print_sorted(x)
+    print()
 
-x = {"a":5, "c":6, "b":[1, 3, 2, 4]}
-print_sorted(x)
-print()
+    x = (3, [4, 3, 2], 9)
+    print_sorted(x)
+    print()
 
-x = {"a":5, "c":6, "b":{"a":5, "c":6, "b":[1, 3, 2, 4]}}
-print_sorted(x)
-print()
+    x = {"a":5, "c":6, "b":[1, 3, 2, 4]}
+    print_sorted(x)
+    print()
 
-x = {"a":5, "c":set(["A", "b", "a"]), "b":[9, 3, 2, 4]}
-print_sorted(x)
-print()
+    x = {"a":5, "c":6, "b":{"a":5, "c":6, "b":[1, 3, 2, 4]}}
+    print_sorted(x)
+    print()
 
-x = {"a":5, "c":set(["A", "b", "a"]), "b":(9, 3, 2, 4)}
-print_sorted(x)
-print()
+    x = {"a":5, "c":set(["A", "b", "a"]), "b":[9, 3, 2, 4]}
+    print_sorted(x)
+    print()
 
-x = [1, 2, 4, 3, 2]
-print_sorted(x)
-print()
+    x = {"a":5, "c":set(["A", "b", "a"]), "b":(9, 3, 2, 4)}
+    print_sorted(x)
+    print()
 
-x = set([1, 2, 4, 3, 2])
-print_sorted(x)
-print()
+    x = [1, 2, 4, 3, 2]
+    print_sorted(x)
+    print()
 
-x = (1, 2, 4, 3, 2)
-print_sorted(x)
-print()
+    x = set([1, 2, 4, 3, 2])
+    print_sorted(x)
+    print()
+
+    x = (1, 2, 4, 3, 2)
+    print_sorted(x)
+    print()
