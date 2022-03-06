@@ -14,11 +14,19 @@ module = __import__(module_name)
 # Create the html file.
 with open(file_name, 'w') as mydoc:
     mydoc.write(html_start)
+    mydoc.write('<h1>Module {0}:</h1>'.format(module_name))
+    if module.__doc__:
+        mydoc.write(module.__doc__)
     # Iterate over every callable method.
     for name, method in module.__dict__.items():
         if callable(method):    
             mydoc.write('<h1>Function {0}:</h1>'.format(name))
-            mydoc.write(method.__doc__)                         
+            if method.__doc__:
+                mydoc.write(method.__doc__)     
+            if method.__annotations__:
+                mydoc.write('<h3>Annotations:</h3>'.format(name))  
+                for annotation in method.__annotations__:
+                    mydoc.write('{0} <br>'.format(annotation))
     mydoc.write(html_end)
 
 
