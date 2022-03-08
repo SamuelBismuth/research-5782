@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\title{\href{https://arxiv.org/abs/1707.00481}{Proximity results and faster algorithms for Integer Programming using the Steinitz Lemma} \\
+Summary}
+\author{Friedrich Eisenbrand, Robert Weismantel \\
+Samuel Bismuth}
+
+\usepackage{amsmath,amsthm,amsfonts} 
+\usepackage{comment}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tabularx,environ}
+\usepackage{algpseudocode,algorithm}
+
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+
+%----------------------------------
+%         Theorem environment
+%----------------------------------
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{lemma*}{Lemma}
+
+%----------------------------------
+%         Macros for comments
+%----------------------------------
+
+\newcommand{\er}[1]{\textcolor{blue}{#1}}
+\newcommand{\erel}[1]{\textcolor{blue}{({Erel says:} #1)}}
+
+\newcommand{\sam}[1]{\textcolor{orange}{#1}}
+\newcommand{\samuel}[1]{\textcolor{orange}{({Samuel says:} #1)}}
+
+%----------------------------------
+%         Other macros
+%----------------------------------
+
+\newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}
+
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+\newcommand{\citep}[1]{\cite{#1}}
+\newcommand{\citet}[1]{\citeA{#1}}
+
+
+\begin{document}
+\maketitle
+
+%מאמר מדעי מתחלק בדרך-כלל למספר פרקים עיקריים. יש לסכם לפי סדר הפרקים:
+%1%. מבוא (Introduction): מה הבעיה שהמאמר בא לפתור? מדוע הבעיה חשובה ומעניינת? מה היו הפתרונות הקודמים? מדוע הם לא מספיק טובים?
+%2%. עבודות קודמות (Related work): אילו מאמרים דומים בנושא זה נכתבו לאחרונה? במה הם שונים מהמאמר הנוכחי?
+%3%. הגדרות (Model / Preliminaries / Notation): מה הם המושגים העיקריים במאמר? איך בדיוק הם מוגדרים?
+%4. האלגוריתם עצמו - יש לכתוב פסאודו-קוד בעברית.
+%5. הוכחת נכונות - זה בדרך-כלל החלק הכי קשה של המאמר. תשתדלו כמיטב יכולתכם להבין מדוע האלגוריתם נכון - לא חייבים להבין את כל הפרטים.
+%6. ניסויים [אם יש] - איזה ניסויים עשו, לאיזה אלגוריתמים אחרים השוו, ואיך ווידאו שהאלגוריתם שלהם אכן טוב יותר?
+%7. סיכום ועבודה עתידים (Future Work) - איזה שאלות נשארו פתוחות לאחר סיום המאמר? איזה רעיונות הם מציעים להמשך המחקר שלהם?
+
+
+
+\section{Abstract and Introduction}
+
+The paper improves the running time of a standard integer programming (IP) in the form
+$\max \{c^T x : A x = b x, x \geq 0, x \in \mathbb{Z}^n \}$, where $A \in \mathbb{Z}^{m \times n}$, $b \in \mathbb{Z}^m$ and $c \in \mathbb{Z}^n$. \\
+The authors show that any standart IP, which is NP-hard unlike linear programing, can be solved in time $(m \cdot \Delta)^{O(m)} \cdot ||b||^2_\infty$, where $\Delta$ is an upper bound of each absolute value of an entry in $A$. This results relies on a lemma of Steinitz that we will define later. 
+
+Another results relies on the Steinitz lemma: the $l_1$-distance of an optimal integer and fractional solution, also under the presence of upper bounds on the variables, is bounded by $m \cdot (2m \cdot \Delta + 1)^m$. The novel strenght of the bound is that it is independent of $n$.
+[TODO: what is the $l_1$-distance of an optimal integer?] \\
+
+This problem is really important and interesting since most combinatorial optimzation and geometry of number can be formulated as IP. We recall that every IP in inequality form can be transformed on IP of the standard form by duplicating variables and introducting slack variables. I have personnaly met a lot of problems (in the field of fair-division and number partition) that can be formulated as IP. That is one of the reason that I chosed to work on this paper. One of the problem is explained in the following \href{https://or.stackexchange.com/questions/7062/}{question}. \\
+
+IP is a really strong tool, and of course, there is already a lot of work on the field. The paper improves Papadimitriou bound on IP running time:  $(m \cdot \Delta)^{O(m2)}$ which was the best bound since 1981. 
+
+\section{Related work}
+
+It is proved by Lenstra that any IP in inequality form is solved in polynomial time if the number of variable is fixed. His algorithm shows a time bound of $2^{O(n^2)}$. This has been improved by Kannan to $2^{O(n \log(n))}$, which is the best bound on the exponent $2$ in $30$ years.
+
+Papadimitriou provide an algorithm for IP in the standard form that is complementary to Lenstra and Kannan result. His algorithm is pseudopolynomial if $m$ is fixed. His algorithm is based on dynamic programming (DP). The DP is a maximum weight path problem on the graph. I decided to ignore the technical details here. We will come back on these details later. The upper bound of the running time is $O(n^{2m+2} \cdot (m \Delta) ^ {(m+1)(2m+1)})$.
+
+There are other algorithms that used the Steinitz lemma in the context of IP. Dash (and others authors) have showns that IP can be solved in pseudopolynomial time if the number of rows is a function of $m$. The run time is less efficient but the interesting aspect of their algorithm is that it relies on linear programming techniques only. Buchin (and others authors) have shown that $m^{m/2-o(m)} \leq$ number of rows $\leq m^{m-o(m)}$, then Dash algorithm is pseudopolynomial in for fixed $m$, but doubly exponential in $m$. 
+
+The authors use Steinitw lemma differently, to derive more efficient DP.
+
+\section{Model / Preliminaries / Notation}
+
+$\Delta$ is an upper bound on the entries of $A$ only. \\
+$|| \cdot ||$ denotes an arbitrary norm of $\mathbb{R}^m$. \\
+Norm definition: \\
+We define by $N$ a norm of a space vector of $\mathbb{R}^m$ if for every $x, y \in \mathbb{R}$:
+
+\begin{itemize}
+	\item $N(x) = 0$ iff $x=0$.
+	\item $N(x+y) \leq N(x) + N(y)$.
+	\item for all $\lambda \in \mathbb{R}$, $N(\lambda x) = |\lambda|N(x)$.
+\end{itemize} 
+
+Steinitz theorem with my word (please see theorem 1.1 of the paper for a formal definition). \\
+If we have $n$ vectors $x_i$ in $\mathbb{R}^m$ such that the sum of every $x_i$ is 0 and for each $i$, the  norm of $x_i$ is smaller or equal to 1, then, there exists a permutation $\pi$ such that all partitial sum satisfy that the norm of the sum of every $n$ vector $x_{\pi}$ is smaller of equal to $c(m)$, we can say upper bounded by $c(m)$, where $c(m)$ is a constant depending on $m$ only. The paper then uses this bound to improve algorithm for IP. We ignore the proof of the theorem for now since it is not relevent for the algorithm.
+
+\section{Algorithm}
+
+The algorithm uses DP that is based on the Steinitz-type-lemma. The algorithm is more efficient than the original algorithm of Papadimitriou.
+
+\section{Corectness of the algorithm}
+\section{Integer knapsack application}
+\section{Future work}
+
+\section{Link of the paper}
+
+https://arxiv.org/abs/1707.00481
+
+
+\end{document}
+
