@@ -2,11 +2,51 @@ import unittest
 import io
 import sys
 
+from exercise_1 import create_doc, html_start, html_end
 from exercise_2 import f
 from exercise_3 import List
 
 
 class TestStringMethods(unittest.TestCase):
+
+    # EXERCISE 1
+
+    def test_html_start(self):
+        self.assertEqual(html_start(), '''<html>\n<head>\n<title> \nDoc\n </title>\n</head> <body>''')
+
+    def test_html_end(self):
+        self.assertEqual(html_end(), '''</body></html>''')
+
+    def test_my_module(self):
+        create_doc('mymodule.py', 'my_doc.html')
+        try:
+            f = open("my_doc.html")
+            self.assertEqual(f.read(), '''<html>
+<head>
+<title> 
+Doc
+ </title>
+</head> <body><h1>Module mymodule:</h1><h1>Function add:</h1>This program adds two
+   numbers and return the result<h1>Function substract:</h1>This program substract two
+   numbers and return the result<h1>Function multiply:</h1>This program multiply two
+   numbers and return the result</body></html>''')
+        except IOError:
+            print("File not accessible")
+        finally:
+            f.close()
+
+    
+    def test_my_module_example(self):
+        create_doc('module_example.py', 'my_doc_module_example.html')
+
+    def test_my_module2(self):
+        create_doc('mymodule2.py', 'my_doc2.html')
+
+    def test_my_module3(self):
+        create_doc('mymodule3.py', 'my_doc3.html')
+    
+    def test_fake_module(self):
+        self.assertEqual(create_doc('fakemodule.py', 'my_doc3.html'), 'Check the module name')
 
 
     # EXERCISE 2
