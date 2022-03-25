@@ -1,0 +1,4 @@
+import sys
+
+MIN_VALUATION = 0
+MAX_VALUATION = 9999
