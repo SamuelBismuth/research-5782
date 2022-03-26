@@ -2,6 +2,8 @@ import numpy as np
 import constant as CONSTANT
 import logger
 
+import steinitz_lemma as steinitz
+
 ''' 
 Since IP includes almost every combinatorial problems, we chosed to focus on PROPWithSharedObject(n,s) problem instance.
 Given n agents PROPWithSharedObject problem decides if there exists a proportionnal division of m objects
@@ -39,11 +41,14 @@ def random_example_equal_valuations(n, m, is_uniform = True):
     logger.agents_valuations(agents_valuations)
     logger.constraints(constraints)
     logger.ip(agents_valuations, constraints)
+    steinitz.prepare_to_lemma(agents_valuations, constraints)
+
 
 def unbounded_example():
     agents_valuations = compute_agents_equal_valuations_uniform(2, 1)
     constraints = compute_prop_constraints(agents_valuations)
     logger.ip(agents_valuations, constraints, is_bounded=False)
+
 
 if __name__ == '__main__':
 
