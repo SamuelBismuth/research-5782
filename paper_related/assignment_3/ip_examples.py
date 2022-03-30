@@ -44,6 +44,14 @@ def random_example_equal_valuations(n, m, is_uniform = True):
     steinitz.prepare_to_lemma(agents_valuations, constraints)
 
 
+def fixed_example_equal_valuations(agents_valuations):
+    constraints = compute_prop_constraints(agents_valuations)
+    logger.agents_valuations(agents_valuations)
+    logger.constraints(constraints)
+    logger.ip(agents_valuations, constraints)
+    steinitz.prepare_to_lemma(agents_valuations, constraints)
+
+
 def unbounded_example():
     agents_valuations = compute_agents_equal_valuations_uniform(2, 1)
     constraints = compute_prop_constraints(agents_valuations)
@@ -52,8 +60,27 @@ def unbounded_example():
 
 if __name__ == '__main__':
 
-    '''First simple example to start with'''
-    random_example_equal_valuations(2, 2)
+    '''
+    Fixed examples.
+    '''
+    print('first simple examples')
+
+    fixed_example_equal_valuations([[2, 3],[2, 3]])
+    ''' As ouput, we should have no solution since the agent with the object '2' will envy the agent with the object '3'.'''
+
+    # print('second simple examples')
+
+    # fixed_example_equal_valuations([[3, 3],[3, 3]])
+    # ''' As ouput, there are two solutions: either x_00 = 1, x_10 = 0, x_11 = 1, x_10=0 or x_00 = 0, x_10 = 1, x_11 = 0, x_10=1. '''
+
+    # print('third simple examples')
+
+    # fixed_example_equal_valuations([[2, 3, 5],[2, 3, 5]])
+    # ''' As ouput, we should have one agent with object '2' and '3' and the second agent with object '5' '''
+    # ''' 2+3=5 '''
+
+    # '''First random simple example to start with'''
+    # random_example_equal_valuations(2, 2)
 
     # '''We first do some random example starting from easy instance to hardest instance due to the amount of agents and objects.'''
     # print('####################################')
@@ -101,3 +128,6 @@ if __name__ == '__main__':
     # random_example_equal_valuations(n=100000, m=200000)
     # print('Poisson distribution')
     # random_example_equal_valuations(n=10, m=20)
+
+
+   
