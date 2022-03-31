@@ -1,8 +1,9 @@
 from operator import le
 import numpy as np
 
-def prepare_to_lemma(agents_valuations, constraints):
-    z_norm = np.linalg.norm(agents_valuations)
+def prepare_to_lemma(agents_valuations, constraints):   
+    # יפה מאד. אבל יש טעות באלגוריתם - הנורמה היא של הפתרון z*, ולא של מטריצת הערכים.
+    z_norm = np.linalg.norm(agents_valuations, ord=1)
     arranged_A = []
     for i in range(len(agents_valuations)):
         arranged_A.append(np.subtract(agents_valuations[i], constraints[i]/z_norm))
