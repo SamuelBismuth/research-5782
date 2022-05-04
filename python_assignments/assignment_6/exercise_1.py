@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 def plotIntersection(t: np.ndarray, f: Callable, g: Callable):
     """
+    This method receives two functions and create a plot with both functions and the intersection points between the functions.
+    
     >>> f = lambda x : x**2
     >>> g = lambda x : x+10
     >>> plotIntersection(np.linspace(-10, 10, 1000), f, g)

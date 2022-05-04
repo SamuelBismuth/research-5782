@@ -4,6 +4,8 @@ import pandas as pd
 
 def education_budget(year:int)->int():
     """
+    We ask what is the education budget of the given year.
+
     >>> education_budget(2020)
     4343657
     >>> education_budget(1998)
@@ -18,6 +20,7 @@ def education_budget(year:int)->int():
 
 def security_budget_ratio(year:int)->float:
     """
+    We ask for the ratio between the security budget of the year and the total budget of the year.
     There are some positive withdraws: how to deal with such a case?
 
     >>> security_budget_ratio(2020)
@@ -42,6 +45,8 @@ def security_budget_ratio(year:int)->float:
 
 def largest_budget_year(office:str)->int:
     """
+    We ask what year has the largest budget for a given office.
+    
     >>> largest_budget_year('משרד הבטחון')
     2018
     >>> largest_budget_year('משטרה ובתי סוהר')
