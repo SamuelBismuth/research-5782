@@ -24,22 +24,17 @@ def security_budget_ratio(year:int)->float:
     There are some positive withdraws: how to deal with such a case?
 
     >>> security_budget_ratio(2020)
-    4343657
-    >>> security_budget_ratio(1998)
-    2184990
+    0.23669068794371143
+    >>> security_budget_ratio(1999)
+    0.1067828857983655
     >>> security_budget_ratio(2002)
-    1492452
+    0.4151247675584324
     """
     df = pd.read_csv('national-budget.csv')
     year_lines = df.loc[df['שנה'] == year]
-    year_budget_sum = - year_lines.loc[df['הוצאה/הכנסה'] == 'הכנסה']['הוצאה נטו'].sum()
-
-    print(year_lines.loc[df['הוצאה/הכנסה'] == 'הכנסה'].loc[df['הוצאה נטו'] > 0]['הוצאה נטו'])
-
+    year_budget_sum = - year_lines.loc[df['הוצאה/הכנסה'] == 'הכנסה'].loc[df['הוצאה נטו'] < 0]['הוצאה נטו'].sum()
 
     security_budget_sum = - year_lines.loc[df['שם רמה 2'] == 'בטחון'].loc[df['הוצאה/הכנסה'] == 'הכנסה']['הוצאה נטו'].sum()
-    print("year_budget_sum {0}".format(year_budget_sum))
-    print("security_budget_sum {0}".format(security_budget_sum))
     return security_budget_sum / year_budget_sum
 
 
