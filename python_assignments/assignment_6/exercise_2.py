@@ -2,6 +2,9 @@ from xmlrpc.client import boolean
 import pandas as pd
 
 
+df = pd.read_csv('national-budget.csv')
+
+
 def education_budget(year:int)->int():
     """
     We ask what is the education budget of the given year.
@@ -13,7 +16,6 @@ def education_budget(year:int)->int():
     >>> education_budget(2002)
     1492452
     """
-    df = pd.read_csv('national-budget.csv')
     education_budget_sum = - df.loc[df['שנה'] == year].loc[df['שם רמה 2'] == 'חינוך'].loc[df['הוצאה/הכנסה'] == 'הכנסה']['הוצאה נטו'].sum()
     return int(education_budget_sum)
 
@@ -30,7 +32,6 @@ def security_budget_ratio(year:int)->float:
     >>> security_budget_ratio(2002)
     0.4151247675584324
     """
-    df = pd.read_csv('national-budget.csv')
     year_lines = df.loc[df['שנה'] == year]
     year_budget_sum = - year_lines.loc[df['הוצאה/הכנסה'] == 'הכנסה'].loc[df['הוצאה נטו'] < 0]['הוצאה נטו'].sum()
 
@@ -49,7 +50,6 @@ def largest_budget_year(office:str)->int:
     >>> largest_budget_year('משרד החינוך והתרבות')
     2001
     """
-    df = pd.read_csv('national-budget.csv')
     education_budget_sum = df.loc[df['שם סעיף'] == office].loc[df['הוצאה/הכנסה'] == 'הכנסה']['הוצאה נטו'].idxmin()
     return df.iloc[education_budget_sum]['שנה']
 
@@ -77,7 +77,6 @@ def is_education_year_budget_bigger_than_security(year:int)->boolean:
     >>> is_education_year_budget_bigger_than_security(2018)
     False
     """
-    df = pd.read_csv('national-budget.csv')
     year_lines = df.loc[df['שנה'] == year]
     education_budget_sum = - year_lines.loc[df['שם רמה 2'] == 'חינוך'].loc[df['הוצאה/הכנסה'] == 'הכנסה']['הוצאה נטו'].sum()
     security_budget_sum = - year_lines.loc[df['שם רמה 2'] == 'בטחון'].loc[df['הוצאה/הכנסה'] == 'הכנסה']['הוצאה נטו'].sum()
