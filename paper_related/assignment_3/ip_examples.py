@@ -63,15 +63,15 @@ if __name__ == '__main__':
     '''
     Fixed examples.
     '''
-    print('first simple examples')
+    # print('first simple examples')
 
-    fixed_example_equal_valuations([[2, 3],[2, 3]])
-    ''' As ouput, we should have no solution since the agent with the object '2' will envy the agent with the object '3'.'''
+    # fixed_example_equal_valuations([[2, 3],[2, 3]])
+    # ''' As ouput, we should have no solution since the agent with the object '2' will envy the agent with the object '3'.'''
 
-    # print('second simple examples')
+    print('second simple examples')
 
-    # fixed_example_equal_valuations([[3, 3],[3, 3]])
-    # ''' As ouput, there are two solutions: either x_00 = 1, x_10 = 0, x_11 = 1, x_10=0 or x_00 = 0, x_10 = 1, x_11 = 0, x_10=1. '''
+    fixed_example_equal_valuations([[3, 3],[3, 3]])
+    ''' As ouput, there are two solutions: either x_00 = 1, x_10 = 0, x_11 = 1, x_10=0 or x_00 = 0, x_10 = 1, x_11 = 0, x_10=1. '''
 
     # print('third simple examples')
 
