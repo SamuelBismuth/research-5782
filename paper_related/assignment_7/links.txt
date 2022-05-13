@@ -1,9 +1,0 @@
-# Links to the added files
-
-Add the networkx package in the requirements:
-
-https://github.com/SamuelBismuth/prtpy/blob/main/requirements.txt
-
-My algorithm with comments and doctest:
-
-https://github.com/SamuelBismuth/prtpy/blob/main/prtpy/partitioning/steinitz.py
