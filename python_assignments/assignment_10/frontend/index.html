@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="algorithm.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Please, enter the two parameters n and m.</h2>
+
+    <tr>
+        <td>n: </td>
+        <td><input id="number_n" type="number" name="number" value="" /></td>
+        <td>m: </td>
+        <td><input id="number_m" type="number" name="number" value="" /></td>
+    </tr>
+
+    <button type="button" onclick="createMatrix()">Submit</button>
+
+    </br>
+    </br>
+
+    <h3>A (m x n):</h3>
+    <table id="A"> </table>
+    <h3>b (m):</h3>
+    <table id="b"> </table>
+    <h3>c (n):</h3>
+    <table id="c"> </table>
+
+    </br>
+    </br>
+
+    <button type="button" onclick="runAlgorithm()">Run IP</button>
+
+    </br>
+    </br>
+
+    <div id="wait" style="display: none;">
+        Please, wait.
+        <div class="loader"></div>
+    </div>
+
+
+</body>
+
+</html>

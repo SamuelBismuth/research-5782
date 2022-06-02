@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+   <h1>Output:</h1>
+   <h3></h3 >
+   <script>
+    var h3 = document.querySelector('h3');
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('output')) {
+      h3.innerText = urlParams.get("output");
+    }
+  </script>
+
+</body>
+
+</html>
